@@ -1,6 +1,7 @@
 require "rails_helper"
 
 RSpec.feature "Creating Articles" do
+   
  scenario "A user creates a new articles" do
    visit "/"
    

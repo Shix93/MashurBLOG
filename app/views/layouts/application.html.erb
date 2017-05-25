@@ -22,22 +22,31 @@
 						<%= link_to "Blog App", root_path, class: "navbar-brand" %> 
 						</div>
 					<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
-						<ul class="nav navbar-nav">
+						<ul class="nav navbar-nav navbar-right">
 							<li class="active"><%= link_to "Authors", "#" %></li>
+							<% if user_signed_in? %>
+								<p class="navbar-text">
+									Signed in as <%= "#{current_user.email}" %>
+								</p>
+								<li ><%= link_to "Signout", destroy_user_session_path, method: :delete %></li>
+							<% else %>
+								<li><%= link_to "Sign up", new_user_registration_path %></li>
+								<li><%= link_to "Sign in", new_user_session_path %></li>
+							<% end %>
 						</ul> 
 					</div>
 				</div> 
 			</nav>
 		</header>
-		<div class="container"> 
-			<div class="row">
-				<div class="col-md-12">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="container"> 
 					<% flash.each do |key, message| %>
 						<div class="text-center alert alert-<%= key == 'notice'? 'success': 'danger' %>">
 							<%= message %> 
 						</div>
-					<% end %>
-					<%= yield %> 
+					<% end %> 
+					<%= yield %>
 				</div>
 			</div> 
 		</div>
